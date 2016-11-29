@@ -793,9 +793,8 @@ Puppet::Type.newtype(:firewall) do
 
   newproperty(:uid, :required_features => :owner) do
     desc <<-EOS
-      UID or Username owner matching rule.  Accepts a string argument
-      only, as iptables does not accept multiple uid in a single
-      statement.
+      UID or Username owner matching rule.  Accepts a string argument only -
+      this can be a single username, numeric uid, or numeric uid range e.g. 0-999.
     EOS
     def insync?(is)
       require 'etc'
@@ -823,14 +822,14 @@ Puppet::Type.newtype(:firewall) do
       # If 'should' contains anything other than digits,
       # we assume that we have to do a lookup to convert
       # to UID
-      unless should[/[0-9]+/] == should
+      unless should[/[0-9]+-[0-9]+|[0-9]+/] == should
         should = Etc.getpwnam(should).uid
       end
 
       # If 'is' contains anything other than digits,
       # we assume that we have to do a lookup to convert
       # to UID
-      unless is[/[0-9]+/] == is
+      unless is[/[0-9]+-[0-9]+|[0-9]+/] == is
         is = Etc.getpwnam(is).uid
       end
 

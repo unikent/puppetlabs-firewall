@@ -781,7 +781,7 @@ firewall { '101 blacklist strange traffic':
 
 * `to`: When using `jump => 'NETMAP'`, you can specify a source or destination subnet to nat to. Requires the `netmap` feature`.
 
-* `uid`: UID or Username owner matching rule. Accepts a string argument only, as iptables does not accept multiple uid in a single statement. Requires the `owner` feature.
+* `uid`: UID or Username owner matching rule. Accepts a string - this can be a single username, numeric uid, or numeric uid range e.g. 0-999. Requires the `owner` feature.
 
 * `week_days`: Only match on the given weekdays. Possible values are 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'.
 
